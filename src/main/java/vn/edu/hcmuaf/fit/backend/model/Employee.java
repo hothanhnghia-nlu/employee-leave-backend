@@ -43,4 +43,8 @@ public class Employee {
 
     @OneToMany(mappedBy = "employee")
     List<LeaveApplications> applicationsList;
+
+    public String getFormattedId() {
+        return String.format("%06d", this.id);
+    }
 }

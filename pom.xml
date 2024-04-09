@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>vn.edu.hcmuaf.fit</groupId>
-	<artifactId>employee-leave-backend</artifactId>
+	<artifactId>user-leave-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>employee-leave-backend</name>
+	<name>user-leave-backend</name>
 	<description>Spring Boot RESTful Web Service</description>
 	<properties>
 		<java.version>17</java.version>

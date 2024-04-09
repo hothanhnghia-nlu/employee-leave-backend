@@ -21,8 +21,8 @@ public class EmployeeController {
 
     // Create a new Employee
     @PostMapping()
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee Employee) {
-        return new ResponseEntity<>(employeeService.saveEmployee(Employee), HttpStatus.CREATED);
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+        return new ResponseEntity<>(employeeService.saveEmployee(employee), HttpStatus.CREATED);
     }
 
     // Get all Employee
@@ -40,8 +40,8 @@ public class EmployeeController {
     // Update Employee by id
     @PutMapping("{id}")
     public ResponseEntity<Employee> updateEmployeeById(@PathVariable ("id") int id,
-                                               @RequestBody Employee Employee) {
-        return new ResponseEntity<>(employeeService.updateEmployeeByID(Employee, id), HttpStatus.OK);
+                                                   @RequestBody Employee employee) {
+        return new ResponseEntity<>(employeeService.updateEmployeeByID(employee, id), HttpStatus.OK);
     }
 
     // Update Employee by id
