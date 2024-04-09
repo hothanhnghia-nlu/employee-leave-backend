@@ -1,11 +1,16 @@
 package vn.edu.hcmuaf.fit.backend.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "employees")
 public class Employee {
@@ -14,22 +19,28 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "fullName", length = 1000)
-    private String fullName;
-
-    @Column(name = "phone", length = 10)
-    private String phone;
-
-    @Column(name = "email", length = 1000)
-    private String email;
+    @Column(name = "user_name")
+    private String username;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "create_at")
-    private LocalDateTime createAt = LocalDateTime.now();
+    @Column(name = "email")
+    private String email;
 
-    @Column(name = "update_at")
-    private LocalDateTime updateAt;
+    @ManyToOne
+    @JoinColumn(name = "boss_id")
+    private Employee boss;
 
+    @Column(name = "potision")
+    private String position;
+
+    @Column(name = "dayOffRemaining")
+    private int dayOffRemaining;
+
+    @Column(name = "firstDayOfWork")
+    private Date firstDayOfWork;
+
+    @OneToMany(mappedBy = "employee")
+    List<LeaveApplications> applicationsList;
 }
