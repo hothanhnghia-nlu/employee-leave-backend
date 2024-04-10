@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>vn.edu.hcmuaf.fit</groupId>
-	<artifactId>user-leave-backend</artifactId>
+	<artifactId>employee-leave-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>user-leave-backend</name>
 	<description>Spring Boot RESTful Web Service</description>

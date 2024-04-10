@@ -1,10 +1,13 @@
 package vn.edu.hcmuaf.fit.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -35,17 +38,28 @@ public class Employee {
     @JoinColumn(name = "boss_id")
     private Employee boss;
 
-    @Column(name = "potision")
+    @Column(name = "position")
     private String position;
 
     @Column(name = "dayOffRemaining")
     private int dayOffRemaining;
 
     @Column(name = "firstDayOfWork")
-    private Date firstDayOfWork;
+    private LocalDateTime firstDayOfWork;
 
-    @OneToMany(mappedBy = "employee")
-    List<LeaveApplications> applicationsList;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<LeaveApplications> applicationsList;
+
+    public Employee(int id) {
+        this.id = id;
+    }
 
     public String getFormattedId() {
         return String.format("%06d", this.id);
