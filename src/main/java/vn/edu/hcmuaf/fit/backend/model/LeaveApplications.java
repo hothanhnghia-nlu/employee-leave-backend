@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -16,7 +18,6 @@ import java.util.Date;
 public class LeaveApplications {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
@@ -27,16 +28,22 @@ public class LeaveApplications {
     private String reason;
 
     @Column(name = "start_date")
-    private Date from;
+    private LocalDateTime from;
 
     @Column(name = "end_date")
-    private Date to;
+    private LocalDateTime to;
 
     @Column(name = "status")
     private int status;
 
     @Column(name = "reason_reject")
     private String reasonReject;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "handle_by")
