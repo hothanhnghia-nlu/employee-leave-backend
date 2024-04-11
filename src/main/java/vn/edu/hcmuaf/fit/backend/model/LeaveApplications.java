@@ -46,6 +46,6 @@ public class LeaveApplications {
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "handle_by")
-    private Employee handleBy;
+    @JoinColumn(name = "received_to")
+    private Employee receivedTo;
 }

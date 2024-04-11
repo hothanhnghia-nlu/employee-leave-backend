@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class EmployeeDTO {
-    private int id;
+    private int userId;
     private String username;
     private String password;
     private String email;
@@ -21,6 +21,7 @@ public class EmployeeDTO {
     private LocalDateTime updatedAt;
 
     public String getFormattedId() {
-        return String.format("%06d", this.id);
+        return String.format("%06d", this.userId);
     }
+
 }

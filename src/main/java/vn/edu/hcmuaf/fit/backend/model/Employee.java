@@ -18,9 +18,9 @@ import java.util.List;
 @Table(name = "employees")
 public class Employee {
     @Id
-    @Column(name = "id")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int userId;
 
     @Column(name = "user_name")
     private String username;
@@ -36,7 +36,7 @@ public class Employee {
 
     @ManyToOne
     @JoinColumn(name = "boss_id")
-    private Employee boss;
+    private Employee bossId;
 
     @Column(name = "position")
     private String position;
@@ -58,10 +58,10 @@ public class Employee {
     private List<LeaveApplications> applicationsList;
 
     public Employee(int id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public String getFormattedId() {
-        return String.format("%06d", this.id);
+        return String.format("%06d", this.userId);
     }
 }

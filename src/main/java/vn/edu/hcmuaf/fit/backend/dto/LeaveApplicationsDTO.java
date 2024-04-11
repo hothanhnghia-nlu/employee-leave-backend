@@ -11,13 +11,15 @@ import java.util.Date;
 @Setter
 public class LeaveApplicationsDTO {
     private int id;
-    private int employeeId;
+    private int userId;
     private String reason;
     private LocalDateTime from;
     private LocalDateTime to;
     private int status;
     private String reasonReject;
-    private int handleById;
+    private int receivedTo;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public LeaveApplicationsDTO() {
     }

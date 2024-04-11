@@ -10,6 +10,7 @@ import vn.edu.hcmuaf.fit.backend.repository.LeaveAppsRepository;
 import vn.edu.hcmuaf.fit.backend.service.LeaveAppsService;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -35,6 +36,17 @@ public class LeaveAppsServiceImpl implements LeaveAppsService {
 
         return leaveAppsRepository.save(leaveApplications);
     }
+
+    @Override
+    public List<LeaveApplications> getLeaveAppsByEmployeeId(int employeeId) {
+        return leaveAppsRepository.findAllById(Collections.singleton(employeeId));
+    }
+
+    @Override
+    public List<LeaveApplications> getLeaveAppsByReceivedTo(int handledBy) {
+        return leaveAppsRepository.findByReceivedTo(handledBy);
+    }
+
 
     // Approve leave application from boss
     @Override

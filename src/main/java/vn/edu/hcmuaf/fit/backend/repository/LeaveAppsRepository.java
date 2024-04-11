@@ -5,7 +5,10 @@ import org.springframework.stereotype.Repository;
 import vn.edu.hcmuaf.fit.backend.model.Employee;
 import vn.edu.hcmuaf.fit.backend.model.LeaveApplications;
 
+import java.util.List;
+
 @Repository
 public interface LeaveAppsRepository extends JpaRepository<LeaveApplications, Integer> {
 
+    List<LeaveApplications> findByReceivedTo(int handledBy);
 }

@@ -10,6 +10,8 @@ public interface LeaveAppsService {
     LeaveApplications saveLeaveApps(int employeeId, LeaveApplicationsDTO leaveApps);
 //    List<LeaveApplications> getAllLeaveApp();
 //    LeaveApplications getLeaveAppsByID(int id);
+    List<LeaveApplications> getLeaveAppsByEmployeeId(int employeeId);
+    List<LeaveApplications> getLeaveAppsByReceivedTo(int handledBy);
     LeaveApplications approveLeaveAppsByID(int id, LeaveApplicationsDTO leaveApps);
 //    void deleteLeaveAppsByID(int id);
 }

@@ -31,5 +31,13 @@ public class LeaveAppsController {
                                                        @RequestBody LeaveApplicationsDTO leaveAppsDTO) {
         return new ResponseEntity<>(leaveAppsService.approveLeaveAppsByID(id, leaveAppsDTO), HttpStatus.OK);
     }
+    @GetMapping("/get-by-employee-id/{employeeId}")
+    public List<LeaveApplications> getLeaveAppsByEmployeeId(@PathVariable ("employeeId") int employeeId) {
+        return leaveAppsService.getLeaveAppsByEmployeeId(employeeId);
+    }
+    @GetMapping("/get-by-received-to/{receivedTo}")
+    public List<LeaveApplications> getLeaveAppsByReceivedTo(@PathVariable ("receivedTo") int handledBy) {
+        return leaveAppsService.getLeaveAppsByReceivedTo(handledBy);
+    }
 
 }
