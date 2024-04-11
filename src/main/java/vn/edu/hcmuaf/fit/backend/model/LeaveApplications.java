@@ -18,6 +18,7 @@ import java.util.Date;
 public class LeaveApplications {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne

@@ -5,12 +5,10 @@ import vn.edu.hcmuaf.fit.backend.dto.LeaveApplicationsDTO;
 import vn.edu.hcmuaf.fit.backend.exception.ResourceNotFoundException;
 import vn.edu.hcmuaf.fit.backend.model.Employee;
 import vn.edu.hcmuaf.fit.backend.model.LeaveApplications;
-import vn.edu.hcmuaf.fit.backend.repository.EmployeeRepository;
 import vn.edu.hcmuaf.fit.backend.repository.LeaveAppsRepository;
 import vn.edu.hcmuaf.fit.backend.service.LeaveAppsService;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class LeaveAppsServiceImpl implements LeaveAppsService {
@@ -34,6 +32,13 @@ public class LeaveAppsServiceImpl implements LeaveAppsService {
         leaveApplications.setCreatedAt(LocalDateTime.now());
 
         return leaveAppsRepository.save(leaveApplications);
+    }
+
+//    Get Leave Application From ID
+    @Override
+    public LeaveApplications getLeaveAppsByID(int id) {
+        return leaveAppsRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Leave Application", "Id", id));
     }
 
     // Approve leave application from boss

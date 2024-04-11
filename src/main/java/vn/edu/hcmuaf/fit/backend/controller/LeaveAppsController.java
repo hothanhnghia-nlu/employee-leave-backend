@@ -7,8 +7,6 @@ import vn.edu.hcmuaf.fit.backend.dto.LeaveApplicationsDTO;
 import vn.edu.hcmuaf.fit.backend.model.LeaveApplications;
 import vn.edu.hcmuaf.fit.backend.service.LeaveAppsService;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("api/leave-applications")
 public class LeaveAppsController {
@@ -27,9 +25,13 @@ public class LeaveAppsController {
 
     // Approve Leave Application
     @PutMapping("/approve/{id}")
-    public ResponseEntity<LeaveApplications> approveLeaveApps(@PathVariable ("id") int id,
-                                                       @RequestBody LeaveApplicationsDTO leaveAppsDTO) {
+    public ResponseEntity<LeaveApplications> approveLeaveApps(@PathVariable("id") int id,
+                                                              @RequestBody LeaveApplicationsDTO leaveAppsDTO) {
         return new ResponseEntity<>(leaveAppsService.approveLeaveAppsByID(id, leaveAppsDTO), HttpStatus.OK);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<LeaveApplications> getEmployeeById(@PathVariable("id") int id) {
+        return new ResponseEntity<>(leaveAppsService.getLeaveAppsByID(id), HttpStatus.OK);
+    }
 }
