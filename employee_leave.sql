@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server : localhost
+ Source Server         : localhost
  Source Server Type    : MySQL
  Source Server Version : 100427
- Source Host   : localhost:3306
- Source Schema : employee_leave
+ Source Host           : localhost:3306
+ Source Schema         : employee_leave
 
  Target Server Type    : MySQL
  Target Server Version : 100427
- File Encoding : 65001
+ File Encoding         : 65001
 
- Date: 10/04/2024 19:58:56
+ Date: 12/04/2024 15:12:16
 */
 
 SET NAMES utf8mb4;
@@ -22,52 +22,58 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `employees`;
 CREATE TABLE `employees`  (
-    `id` int NOT NULL AUTO_INCREMENT,
-    `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-    `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-    `full_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-    `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-    `position` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-    `day_off_remaining` int NULL DEFAULT NULL,
-    `first_day_of_work` datetime NULL DEFAULT NULL,
-    `boss_id` int NULL DEFAULT NULL,
-    `created_at` datetime NULL DEFAULT NULL,
-    `updated_at` datetime NULL DEFAULT NULL,
-    PRIMARY KEY (`id`) USING BTREE,
-    INDEX `FKi77y1j3uq9xk27nbsrc2xn0hk`(`boss_id` ASC) USING BTREE,
-    CONSTRAINT `FKi77y1j3uq9xk27nbsrc2xn0hk` FOREIGN KEY (`boss_id`) REFERENCES `employees` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `full_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `position` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `day_off_remaining` int NULL DEFAULT NULL,
+  `first_day_of_work` datetime NULL DEFAULT NULL,
+  `boss_id` int NULL DEFAULT NULL,
+  `created_at` datetime NULL DEFAULT NULL,
+  `updated_at` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `FKi77y1j3uq9xk27nbsrc2xn0hk`(`boss_id` ASC) USING BTREE,
+  CONSTRAINT `FKi77y1j3uq9xk27nbsrc2xn0hk` FOREIGN KEY (`boss_id`) REFERENCES `employees` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of employees
 -- ----------------------------
-INSERT INTO `employees` VALUES (1, 'nguyenvana', '123', 'Nguyễn Văn A', 'abc', 'ABC', 26, '2018-03-12 00:00:00.000000', NULL, '2024-04-09 00:00:00', NULL);
+INSERT INTO `employees` VALUES (2, 'hai', '12345678', 'Nguyen Hoang Hai', '20130166@st.hcmuaf.edu.vn', 'dev', 12, '2024-04-12 09:50:26', 3, NULL, NULL);
+INSERT INTO `employees` VALUES (3, 'ngoan', '12345678', 'Ngoan hoang', '20130335@st.hcnuaf.edu.vn', 'PO', 24, '2024-04-02 09:51:11', NULL, NULL, NULL);
+INSERT INTO `employees` VALUES (4, 'nghia', '12345678', 'Ho Thanh Nghia', '20130166@st.hcmuaf.edu.vn', 'dev', 12, '2024-04-12 09:50:26', 3, NULL, NULL);
+INSERT INTO `employees` VALUES (5, 'hieu', '12345678', 'Tran Trung Hieu', '20130166@st.hcmuaf.edu.vn', 'dev', 13, '2024-04-12 09:50:26', 3, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for leave_application
 -- ----------------------------
 DROP TABLE IF EXISTS `leave_application`;
 CREATE TABLE `leave_application`  (
-    `id` int NOT NULL,
-    `employee_id` int NULL DEFAULT NULL,
-    `reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-    `start_date` datetime NULL DEFAULT NULL,
-    `end_date` datetime NULL DEFAULT NULL,
-    `status` int NULL DEFAULT NULL,
-    `reason_reject` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-    `handle_by` int NULL DEFAULT NULL,
-    `created_at` datetime NULL DEFAULT NULL,
-    `updated_at` datetime NULL DEFAULT NULL,
-    PRIMARY KEY (`id`) USING BTREE,
-    INDEX `FKdrfuhqvl3xkiiewe9blflqdji`(`employee_id` ASC) USING BTREE,
-    INDEX `FK7lertavnxq8kjm56okfkh4i7t`(`handle_by` ASC) USING BTREE,
-    CONSTRAINT `FK7lertavnxq8kjm56okfkh4i7t` FOREIGN KEY (`handle_by`) REFERENCES `employees` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT `FKdrfuhqvl3xkiiewe9blflqdji` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `employee_id` int NULL DEFAULT NULL,
+  `reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `start_date` date NULL DEFAULT NULL,
+  `end_date` date NULL DEFAULT NULL,
+  `status` int NULL DEFAULT NULL,
+  `reason_reject` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `handle_by` int NULL DEFAULT NULL,
+  `created_at` datetime NULL DEFAULT NULL,
+  `updated_at` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `FKdrfuhqvl3xkiiewe9blflqdji`(`employee_id` ASC) USING BTREE,
+  INDEX `FK7lertavnxq8kjm56okfkh4i7t`(`handle_by` ASC) USING BTREE,
+  CONSTRAINT `FK7lertavnxq8kjm56okfkh4i7t` FOREIGN KEY (`handle_by`) REFERENCES `employees` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FKdrfuhqvl3xkiiewe9blflqdji` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of leave_application
 -- ----------------------------
+INSERT INTO `leave_application` VALUES (1, 2, 'dbrb', '2024-04-12', '2024-04-16', 0, 'Thiếu người làm việc', 3, NULL, '2024-04-12 10:33:15');
+INSERT INTO `leave_application` VALUES (5, 4, 'hai', '2024-04-24', '2024-04-25', 2, NULL, 3, '2024-04-12 14:30:37', NULL);
+INSERT INTO `leave_application` VALUES (6, 4, 'tao muon nghi', '2024-04-24', '2024-04-25', 0, '', 3, '2024-04-12 14:40:16', '2024-04-12 14:58:32');
 
 -- ----------------------------
 -- Procedure structure for update_day_off_remaining
