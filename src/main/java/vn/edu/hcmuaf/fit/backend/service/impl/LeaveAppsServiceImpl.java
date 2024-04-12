@@ -16,20 +16,27 @@ import java.util.List;
 @Service
 public class LeaveAppsServiceImpl implements LeaveAppsService {
     private LeaveAppsRepository leaveAppsRepository;
+    private  EmployeeRepository employeeRepository;
 
-    public LeaveAppsServiceImpl(LeaveAppsRepository leaveAppsRepository) {
+    public LeaveAppsServiceImpl(LeaveAppsRepository leaveAppsRepository, EmployeeRepository employeeRepository) {
         this.leaveAppsRepository = leaveAppsRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     // Create a new leave application
     @Override
     public LeaveApplications saveLeaveApps(int employeeId, LeaveApplicationsDTO leaveAppsDTO) {
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(() ->
+                new ResourceNotFoundException("Employee", "Id", leaveAppsDTO.getId()));
+        System.out.println(employeeId);
+//        System.out.println(employee.getBossId());
         LeaveApplications leaveApplications = new LeaveApplications();
         leaveApplications.setId(leaveAppsDTO.getId());
-        leaveApplications.setEmployee(new Employee(employeeId));
+        leaveApplications.setEmployee(employee);
         leaveApplications.setReason(leaveAppsDTO.getReason());
         leaveApplications.setFrom(leaveAppsDTO.getFrom());
         leaveApplications.setTo(leaveAppsDTO.getTo());
+        leaveApplications.setHandleBy(employee.getBossId());
         leaveApplications.setStatus(2);
         leaveApplications.setCreatedAt(LocalDateTime.now());
 

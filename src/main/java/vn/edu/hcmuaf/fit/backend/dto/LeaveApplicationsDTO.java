@@ -13,8 +13,8 @@ public class LeaveApplicationsDTO {
     private int id;
     private int userId;
     private String reason;
-    private LocalDateTime from;
-    private LocalDateTime to;
+    private LocalDate from;
+    private LocalDate to;
     private int status;
     private String reasonReject;
     private int receivedTo;
