@@ -55,4 +55,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeRepository.deleteById(id);
     }
+
+    @Override
+    public String login(String username, String pass) {
+       Employee e = employeeRepository.findByUsernameAndPassword(username,pass);
+//        System.out.println(e.getUsername());
+       if (e!=null) return e.getId()+"";
+        return "user khong dung";
+    }
 }

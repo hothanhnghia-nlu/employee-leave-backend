@@ -30,7 +30,6 @@ public class LeaveAppsServiceImpl implements LeaveAppsService {
         leaveApplications.setReason(leaveAppsDTO.getReason());
         leaveApplications.setFrom(leaveAppsDTO.getFrom());
         leaveApplications.setTo(leaveAppsDTO.getTo());
-//        leaveApplications.setHandleBy();
         leaveApplications.setStatus(2);
         leaveApplications.setCreatedAt(LocalDateTime.now());
 
@@ -39,13 +38,15 @@ public class LeaveAppsServiceImpl implements LeaveAppsService {
 
     @Override
     public List<LeaveApplications> getLeaveAppsByEmployeeId(int employeeId) {
-        return leaveAppsRepository.findAllById(Collections.singleton(employeeId));
+        return leaveAppsRepository.findByEmployeeId(employeeId);
     }
 
-    @Override
-    public List<LeaveApplications> getLeaveAppsByReceivedTo(int handledBy) {
-        return leaveAppsRepository.findByReceivedTo(handledBy);
-    }
+//    @Override
+//    public List<LeaveApplications> getLeaveAppsByHandleBy(int handleBy) {
+//        return leaveAppsRepository.findByHandleBy(handleBy);
+//    }
+
+
 
 
     // Approve leave application from boss

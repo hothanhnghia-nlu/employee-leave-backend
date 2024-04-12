@@ -18,9 +18,8 @@ import java.util.List;
 @Table(name = "employees")
 public class Employee {
     @Id
-    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private int id;
 
     @Column(name = "user_name")
     private String username;
@@ -41,10 +40,10 @@ public class Employee {
     @Column(name = "position")
     private String position;
 
-    @Column(name = "dayOffRemaining")
+    @Column(name = "day_off_remaining")
     private int dayOffRemaining;
 
-    @Column(name = "firstDayOfWork")
+    @Column(name = "first_day_of_work")
     private LocalDateTime firstDayOfWork;
 
     @Column(name = "created_at")
@@ -58,10 +57,10 @@ public class Employee {
     private List<LeaveApplications> applicationsList;
 
     public Employee(int id) {
-        this.userId = id;
+        this.id = id;
     }
 
     public String getFormattedId() {
-        return String.format("%06d", this.userId);
+        return String.format("%06d", this.id);
     }
 }

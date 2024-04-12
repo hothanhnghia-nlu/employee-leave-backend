@@ -11,7 +11,7 @@ public interface LeaveAppsService {
 //    List<LeaveApplications> getAllLeaveApp();
 //    LeaveApplications getLeaveAppsByID(int id);
     List<LeaveApplications> getLeaveAppsByEmployeeId(int employeeId);
-    List<LeaveApplications> getLeaveAppsByReceivedTo(int handledBy);
+//    List<LeaveApplications> getLeaveAppsByHandleBy(int handleBy);
     LeaveApplications approveLeaveAppsByID(int id, LeaveApplicationsDTO leaveApps);
 //    void deleteLeaveAppsByID(int id);
 }
