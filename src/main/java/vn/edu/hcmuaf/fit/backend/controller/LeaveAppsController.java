@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.hcmuaf.fit.backend.dto.LeaveApplicationsDTO;
+import vn.edu.hcmuaf.fit.backend.model.Employee;
 import vn.edu.hcmuaf.fit.backend.model.LeaveApplications;
 import vn.edu.hcmuaf.fit.backend.service.LeaveAppsService;
 
@@ -24,7 +25,10 @@ public class LeaveAppsController {
                                                              @RequestBody LeaveApplicationsDTO leaveApps) {
         return new ResponseEntity<>(leaveAppsService.saveLeaveApps(employeeId, leaveApps), HttpStatus.CREATED);
     }
-
+    @GetMapping("{id}")
+    public ResponseEntity<LeaveApplications> getEmployeeById(@PathVariable ("id") int id) {
+        return new ResponseEntity<>(leaveAppsService.getLeaveAppsByID(id), HttpStatus.OK);
+    }
     // Approve Leave Application
     @PutMapping("/approve/{id}")
     public ResponseEntity<LeaveApplications> approveLeaveApps(@PathVariable ("id") int id,
