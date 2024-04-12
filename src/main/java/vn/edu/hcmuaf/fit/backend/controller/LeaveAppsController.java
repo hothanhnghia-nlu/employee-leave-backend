@@ -35,9 +35,9 @@ public class LeaveAppsController {
     public List<LeaveApplications> getLeaveAppsByEmployeeId(@PathVariable ("employeeId") int employeeId) {
         return leaveAppsService.getLeaveAppsByEmployeeId(employeeId);
     }
-//    @GetMapping("/get-by-handle-by/{handleBy}")
-//    public List<LeaveApplications> getLeaveAppsByHandleBy(@PathVariable ("handleBy") int handleBy) {
-//        return leaveAppsService.getLeaveAppsByHandleBy(handleBy);
-//    }
+    @GetMapping("/get-by-handle-by/{handleBy}")
+    public List<LeaveApplications> getLeaveAppsByHandleBy(@PathVariable ("handleBy") int handleBy) {
+        return leaveAppsService.getLeaveAppsByHandleById(handleBy);
+    }
 
 }

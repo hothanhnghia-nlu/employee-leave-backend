@@ -29,10 +29,10 @@ public class LeaveApplications {
     private String reason;
 
     @Column(name = "start_date")
-    private LocalDateTime from;
+    private LocalDate from;
 
     @Column(name = "end_date")
-    private LocalDateTime to;
+    private LocalDate to;
 
     @Column(name = "status")
     private int status;

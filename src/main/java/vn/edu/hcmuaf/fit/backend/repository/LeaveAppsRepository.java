@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface LeaveAppsRepository extends JpaRepository<LeaveApplications, Integer> {
 
-//  List<LeaveApplications> findByHandleBy(int handleBy);
+  List<LeaveApplications> findByHandleById(int handleBy);
   List<LeaveApplications> findByEmployeeId(int employeeId);
 }
