@@ -44,6 +44,17 @@ public class LeaveAppsServiceImpl implements LeaveAppsService {
     }
 
     @Override
+    public List<LeaveApplications> getAllLeaveApp() {
+        return leaveAppsRepository.findAll();
+    }
+
+    @Override
+    public LeaveApplications getLeaveAppsByID(int id) {
+        return leaveAppsRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("leaveApp", "Id", id));
+    }
+
+    @Override
     public List<LeaveApplications> getLeaveAppsByEmployeeId(int employeeId) {
         return leaveAppsRepository.findByEmployeeId(employeeId);
     }
