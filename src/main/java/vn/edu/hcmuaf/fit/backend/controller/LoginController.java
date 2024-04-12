@@ -1,9 +1,9 @@
 package vn.edu.hcmuaf.fit.backend.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import vn.edu.hcmuaf.fit.backend.dto.LoginBodydto;
+import vn.edu.hcmuaf.fit.backend.model.Employee;
 import vn.edu.hcmuaf.fit.backend.service.EmployeeService;
 
 @RestController
@@ -13,6 +13,10 @@ public class LoginController {
 
     public LoginController(EmployeeService employeeService) {
         this.employeeService = employeeService;
+    }
+    @PostMapping()
+    public String login(@RequestBody LoginBodydto loginBodydto){
+        return employeeService.login(loginBodydto.getUsername(),loginBodydto.getPass());
     }
 
 

@@ -11,4 +11,5 @@ public interface EmployeeService {
     Employee getEmployeeByID(int id);
     Employee updateEmployeeByID(Employee employee, int id);
     void deleteEmployeeByID(int id);
+    String login(String username, String pass);
 }

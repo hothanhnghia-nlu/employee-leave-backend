@@ -18,6 +18,7 @@ import java.util.Date;
 public class LeaveApplications {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
@@ -46,6 +47,6 @@ public class LeaveApplications {
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "received_to")
-    private Employee receivedTo;
+    @JoinColumn(name = "handle_by")
+    private Employee handleBy;
 }
