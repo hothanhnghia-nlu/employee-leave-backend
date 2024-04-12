@@ -41,10 +41,10 @@ public class LeaveAppsServiceImpl implements LeaveAppsService {
         return leaveAppsRepository.findByEmployeeId(employeeId);
     }
 
-//    @Override
-//    public List<LeaveApplications> getLeaveAppsByHandleBy(int handleBy) {
-//        return leaveAppsRepository.findByHandleBy(handleBy);
-//    }
+    @Override
+    public List<LeaveApplications> getLeaveAppsByHandleById(int handleBy) {
+        return leaveAppsRepository.findByHandleById(handleBy);
+    }
 
 
 
