@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : localhost_3306
  Source Server Type    : MySQL
- Source Server Version : 100427
+ Source Server Version : 100424
  Source Host           : localhost:3306
  Source Schema         : employee_leave
 
  Target Server Type    : MySQL
- Target Server Version : 100427
+ Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 12/04/2024 15:12:16
+ Date: 13/04/2024 08:10:17
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `employees`  (
   `full_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `position` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `day_off_remaining` int NULL DEFAULT NULL,
+  `day_off_remaining` int NULL DEFAULT 0,
   `first_day_of_work` datetime NULL DEFAULT NULL,
   `boss_id` int NULL DEFAULT NULL,
   `created_at` datetime NULL DEFAULT NULL,
@@ -36,15 +36,17 @@ CREATE TABLE `employees`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FKi77y1j3uq9xk27nbsrc2xn0hk`(`boss_id` ASC) USING BTREE,
   CONSTRAINT `FKi77y1j3uq9xk27nbsrc2xn0hk` FOREIGN KEY (`boss_id`) REFERENCES `employees` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of employees
 -- ----------------------------
-INSERT INTO `employees` VALUES (2, 'hai', '12345678', 'Nguyen Hoang Hai', '20130166@st.hcmuaf.edu.vn', 'dev', 12, '2024-04-12 09:50:26', 3, NULL, NULL);
-INSERT INTO `employees` VALUES (3, 'ngoan', '12345678', 'Ngoan hoang', '20130335@st.hcnuaf.edu.vn', 'PO', 24, '2024-04-02 09:51:11', NULL, NULL, NULL);
-INSERT INTO `employees` VALUES (4, 'nghia', '12345678', 'Ho Thanh Nghia', '20130166@st.hcmuaf.edu.vn', 'dev', 12, '2024-04-12 09:50:26', 3, NULL, NULL);
-INSERT INTO `employees` VALUES (5, 'hieu', '12345678', 'Tran Trung Hieu', '20130166@st.hcmuaf.edu.vn', 'dev', 13, '2024-04-12 09:50:26', 3, NULL, NULL);
+INSERT INTO `employees` VALUES (2, 'hai', '12345678', 'Nguyen Hoang Hai', '20130166@st.hcmuaf.edu.vn', 'dev', 56, '2024-04-12 09:50:26', 3, NULL, NULL);
+INSERT INTO `employees` VALUES (3, 'ngoan', '12345678', 'Ngoan hoang', '20130335@st.hcnuaf.edu.vn', 'PO', 106, '2024-04-02 09:51:11', NULL, NULL, NULL);
+INSERT INTO `employees` VALUES (4, 'nghia', '12345678', 'Ho Thanh Nghia', '20130166@st.hcmuaf.edu.vn', 'dev', 94, '2024-04-12 09:50:26', 3, NULL, NULL);
+INSERT INTO `employees` VALUES (5, 'hieu', '12345678', 'Tran Trung Hieu', '20130166@st.hcmuaf.edu.vn', 'dev', 95, '2024-04-12 09:50:26', 3, NULL, NULL);
+INSERT INTO `employees` VALUES (8, 'hai', '12345678', 'Nguyen Hoang Hai', '20130166@st.hcmuaf.edu.vn', 'dev', 12, '2023-12-03 09:50:26', 3, NULL, NULL);
+INSERT INTO `employees` VALUES (9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for leave_application
@@ -90,36 +92,39 @@ BEGIN
   DECLARE years_worked INT;
   DECLARE new_day_off_remaining INT;
   DECLARE cur CURSOR FOR SELECT id, first_day_of_work, day_off_remaining FROM employees;
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
-OPEN cur;
+  OPEN cur;
 
-read_loop: LOOP
+  read_loop: LOOP
     FETCH cur INTO _id, _first_day_of_work, _day_off_remaining;
     IF done THEN
       LEAVE read_loop;
-END IF;
+    END IF;
 
     SET months_worked = TIMESTAMPDIFF(MONTH, _first_day_of_work, NOW());
-    SET years_worked = TIMESTAMPDIFF(YEAR, _first_day_of_work, NOW());
+    SET years_worked = YEAR(NOW()) - YEAR(_first_day_of_work);
 
-    IF months_worked >= 12 THEN
+    IF years_worked = 0 THEN
+      -- Trong năm đầu tiên làm việc, số ngày nghỉ phép = 12 - số tháng đã làm việc + 1
+      SET new_day_off_remaining = 12 - months_worked + 1;
+    ELSEIF years_worked >= 1 THEN
       SET new_day_off_remaining = 12;
-ELSE
+    ELSE
       SET new_day_off_remaining = months_worked + 1;
-END IF;
+    END IF;
 
     IF years_worked >= 5 THEN
       SET new_day_off_remaining = new_day_off_remaining + 1;
-END IF;
+    END IF;
 
     -- Cộng dồn số ngày nghỉ phép còn lại từ năm trước
     SET new_day_off_remaining = new_day_off_remaining + _day_off_remaining;
 
-UPDATE employees SET day_off_remaining = new_day_off_remaining WHERE id = _id;
-END LOOP;
+    UPDATE employees SET day_off_remaining = new_day_off_remaining WHERE id = _id;
+  END LOOP;
 
-CLOSE cur;
+  CLOSE cur;
 END
 ;;
 delimiter ;
